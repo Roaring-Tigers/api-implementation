@@ -1,4 +1,5 @@
 import React,{useState} from "react";
+import axios from "axios";
 
 
 const Hello = () => {
@@ -17,6 +18,12 @@ const Hello = () => {
                 setData1(data)
             })
             .catch(error => console.log(error));
+     }
+
+     function api1Axios(){
+         axios.get("http://localhost:5000/hello")
+         .then(response => console.log(response.data.message))
+         .catch(err=>console.log(err))
      }
 
 
@@ -40,14 +47,30 @@ const Hello = () => {
             .catch(error => console.log(error));
      }
 
+
+     function api2Axios(e){
+        e.preventDefault()
+        axios.post("http://localhost:5000/sum",{num1, num2})
+        .then(response => console.log(response.data.message))
+        .catch(err=>console.log(err))
+     }
+
+
+
+
+
+
+
+
+
     return(
         <div>
-            <button onClick={api1}>Click Ap1</button>
+            <button onClick={api1Axios}>Click Ap1</button>
             {
                 data1 && <p>{data1.message}</p>
             }
 
-            <form onSubmit={api2}>
+            <form onSubmit={api2Axios}>
                  {/* hey create two inputs for two numbers */}
                  <input type="number"  placeholder="enter num 1"
                     onChange={(e)=>setNum1(e.target.value)}
